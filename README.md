@@ -22,8 +22,9 @@ The server must be non-blocking, handling all connections with a single poll() (
 
 <a href="/.github/en.subject.pdf">Click here</a> for the subject of this project.
 
-![demo](https://github.com/user-attachments/assets/53e5faa5-0f94-45b3-a62f-93fac40d08a0)
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/53e5faa5-0f94-45b3-a62f-93fac40d08a0" alt="demo">
+</p>
 
 <br>
 
@@ -31,24 +32,102 @@ The server must be non-blocking, handling all connections with a single poll() (
 #### COMPILATION AND EXECUTION
 #### 1º - Clone the repository
 ```bash
-$ ./git clone git@github.com:diocode/42-Minishell.git
+$ ./git clone git@github.com:diocode/42-irc.git
 ```
 
 #### 2º - Enter the project folder and run `make`
 ```bash
-$ ./cd 42-Minishell
+$ ./cd 42-irc
 $ ./make
 ```
 
 #### 3º - Launch the program
 ```bash
-$ ./minishell
+$ ./ircserv <port number> <password>
 ```
 
-> (optional) Launch the program using valgrind
-```bash
-valgrind -s --suppressions=readline_leaks.txt --leak-check=full --show-leak-kinds=all ./minishell
+The server is running now and the there's 2 ways to connect to the server:
+`nc` command through the terminal
+`Hexchat` an IRC client application
+
+To connect using the `nc` command:
+
+```shell
+nc localhost <port number>
 ```
+
+<br>
+
+**- Available Commands -**
+
+*User Commands:*
+
+`PASS` : Authenticate with the server before using other commands.
+>Usage: PASS <password>
+
+<br>
+
+`NICK` : Set or change your nickname.
+>Usage: NICK <nickname>
+
+<br>
+
+`USER` : Register with a username and real name.
+>Usage: USER <username> 0 * <realname>
+
+<br>
+
+`JOIN` : Join or create a channel (becoming an operator if created).
+>Usage: JOIN <#channel> [key]
+
+<br>
+
+`PRIVMSG` : Send a private or channel message.
+>Usage: PRIVMSG <target>{,<target>} <message>
+
+<br>
+
+`PART` : Leave a channel. If empty, the channel is removed.
+>Usage: PART <#channel>
+
+<br>
+
+`QUIT` : Disconnect from the server cleanly.
+> Usage: QUIT
+
+<br>
+
+<br>
+
+*Operator Commands:*
+
+`KICK` : Remove a user from a channel.
+>Usage: KICK <#channel> <user> [<reason>]
+
+<br>
+
+`INVITE` : Invite a user to a channel.
+>Usage: INVITE <nickname> <channel>
+
+<br>
+
+`TOPIC` : View or change a channel’s topic.
+>Usage: TOPIC <#channel> [<topic>]
+
+<br>
+
+`MODE` : Modify channel settings (+ to enable, - to disable).
+	<br>`i` : Invite-only mode
+        <br>`t` : Topic change restricted to operators
+        <br>`k` : Set/remove channel password
+        <br>`o` : Grant/revoke operator privilege
+        <br>`l` : Set/remove user limit
+ >Usage: MODE <#channel> <modestring> [args]
+
+<br>
+<br>
+
+When using HexChat, PASS, NICK, and USER run automatically. In nc, they must be entered manually.
 
 <br>
 
